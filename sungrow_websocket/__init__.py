@@ -17,21 +17,6 @@ import csv
 import requests
 
 
-url = 'http://localhost:8123/api/states/variable.'
-
-headers = {
-    'Authorization': 'Bearer abcdefg',
-    'content-type': 'application/json'
-}
-
-errors = ''
-
-variable = 'sglogpush'
-state = '1' # a dummy state
-attributes = '{"entries": ' + str(table) + '}'
-
-datan = '{"state": "' + str(state) + '", "attributes": ' + attributes + '}'
-datan = datan.replace("'",'"')
 
 
 
@@ -250,6 +235,24 @@ def main():
     f = open("/share/log.txt", "a")
     print(table, file=f)
     f.close()
+
+
+    # posttest
+    url = 'http://localhost:8123/api/states/variable.'
+
+    headers = {
+        'Authorization': 'Bearer abcdefg',
+        'content-type': 'application/json'
+    }
+
+    errors = ''
+
+    variable = 'sglogpush'
+    state = '1' # a dummy state
+    attributes = '{"entries": ' + str(table) + '}'
+
+    datan = '{"state": "' + str(state) + '", "attributes": ' + attributes + '}'
+    datan = datan.replace("'",'"')
     
     r = requests.post(url+variable, data=datan, headers=headers)
     if r.status_code != 200 and r.status_code != 201:
