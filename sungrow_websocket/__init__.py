@@ -171,6 +171,7 @@ class SungrowWebsocket:
                 )
                 d = json.loads(await websocket.recv())
                 if d.get('result_code') == 1 or d.get('result_arg') == "success":
+                    print(d["result_data"]["list"])
                     for item in d["result_data"]["list"]:
                         if item["name"].startswith("I18N_COMMON_"):
                             item_name = self.strings.get(item["name"][:-3]).format(item["name"][-1])
@@ -200,7 +201,7 @@ class SungrowWebsocket:
                             value=item["current"],
                             unit=item["current_unit"],
                         )
-        return data, d
+        return data
 
     def get_data(self) -> dict[str, InverterItem]:
         return asyncio.run(self.get_data_async())
@@ -229,7 +230,7 @@ def main():
             [item.device, item.desc, item.value, item.unit] for item in data.values()
         ]
     print(AsciiTable(table).table)
-    print(d)
+    #print(data)
     f = open("/config/www/resurser/log.json", "w")
     print(data, file=f)
     f.close()
