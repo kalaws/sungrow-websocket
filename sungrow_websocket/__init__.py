@@ -230,6 +230,7 @@ def main():
             [item.device, item.desc, item.value, item.unit] for item in data.values()
         ]
     print(AsciiTable(table).table)
+    print(data)
     f = open("/config/www/resurser/log.txt", "w")
     print(table, file=f)
     f.close()
