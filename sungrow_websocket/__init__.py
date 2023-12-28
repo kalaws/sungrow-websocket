@@ -231,7 +231,7 @@ def main():
         ]
     print(AsciiTable(table).table)
     print(data)
-    f = open("/config/www/resurser/log.txt", "w")
+    f = open("/config/www/resurser/log.json", "w")
     print(data, file=f)
     f.close()
 
