@@ -239,7 +239,7 @@ def main():
     print(AsciiTable(table).table)
     print(data)
     f = open("/config/www/resurser/log.json", "w")
-    print(table2, file=f)
+    print(json.dumps(table2), file=f)
     f.close()
 
 
