@@ -201,7 +201,7 @@ class SungrowWebsocket:
                             value=item["current"],
                             unit=item["current_unit"],
                         )
-        return data
+        return data, d
 
     def get_data(self) -> dict[str, InverterItem]:
         return asyncio.run(self.get_data_async())
