@@ -233,9 +233,9 @@ def main():
         table = [["Device", "Item", "Value"]] + [
             [item.device, item.desc, item.value, item.unit] for item in data.values()
         ]
-        table2 = { + Body {:
+        table2 = { "Body {:"
             item.name: item.value for item in data.values()
-        } + }
+        "}" }
     print(AsciiTable(table).table)
     print(data)
     f = open("/config/www/resurser/log.json", "w")
