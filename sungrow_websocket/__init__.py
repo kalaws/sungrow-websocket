@@ -217,7 +217,7 @@ def main():
     data: list[InverterItem] = SungrowWebsocket(args.host).get_data()
     if args.details:
         table: list[list[str]] = [["Item", "Value", "ID"]] + [
-            [item.desc, f"{item.value} {item.unit}", id]
+            [item.desc, f"{item.value} {item.unit}", id]\
             for id, item in data.items()
         ]
     else:
@@ -227,5 +227,4 @@ def main():
     print(AsciiTable(table).table)
     f = open("/share/log.txt", "a")
     print(table, file=f)
-    print(data, file=f)
     f.close()
