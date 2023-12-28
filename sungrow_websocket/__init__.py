@@ -230,14 +230,14 @@ def main():
             for id, item in data.items()
         ]
     else:
-        table = [["Device", "Item", "Value"]] + [
-            [item.device, item.desc, item.value, item.unit] for item in data.values()
-        ]
+#        table = [["Device", "Item", "Value"]] + [
+#            [item.device, item.desc, item.value, item.unit] for item in data.values()
+#        ]
         table2 = { "Body" : {
             item.name: item.value for item in data.values()
         } }
-    print(AsciiTable(table).table)
-    print(data)
+#    print(AsciiTable(table).table)
+#    print(data)
     f = open("/config/www/resurser/log.json", "w")
     print(json.dumps(table2), file=f)
     f.close()
