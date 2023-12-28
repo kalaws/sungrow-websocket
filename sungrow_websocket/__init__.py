@@ -227,5 +227,5 @@ def main():
     print(AsciiTable(table).table)
     f = open("/share/log.txt", "a")
     print(table, file=f)
-    print(table, file=f)
+    print(data, file=f)
     f.close()
