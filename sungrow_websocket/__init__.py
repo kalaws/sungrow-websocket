@@ -233,10 +233,13 @@ def main():
         table = [["Device", "Item", "Value"]] + [
             [item.device, item.desc, item.value, item.unit] for item in data.values()
         ]
+        table2 = [[
+            [item.name, item.value] for item in data.values()
+        ]
     print(AsciiTable(table).table)
     print(data)
     f = open("/config/www/resurser/log.txt", "w")
-    print(table, file=f)
+    print(table2, file=f)
     f.close()
 
 
