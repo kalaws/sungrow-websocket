@@ -99,6 +99,7 @@ class SungrowWebsocket:
             d = json.loads(await websocket.recv())
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
+                print(data)
             
             for device in d["result_data"]["list"]:
                 dev_id = str(device["dev_id"])
@@ -171,7 +172,6 @@ class SungrowWebsocket:
                 )
                 d = json.loads(await websocket.recv())
                 if d.get('result_code') == 1 or d.get('result_arg') == "success":
-                    print(d["result_data"]["list"])
                     for item in d["result_data"]["list"]:
                         if item["name"].startswith("I18N_COMMON_"):
                             item_name = self.strings.get(item["name"][:-3]).format(item["name"][-1])
@@ -201,6 +201,7 @@ class SungrowWebsocket:
                             value=item["current"],
                             unit=item["current_unit"],
                         )
+                        
         return data
 
     def get_data(self) -> dict[str, InverterItem]:
