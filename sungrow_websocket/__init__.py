@@ -231,7 +231,7 @@ def main():
         ]
     else:
         table = [["Device", "Item", "Value"]] + [
-            [item.device, item.desc, f"{item.value} {item.unit}"] for item in data.values()
+            [item.device, item.desc, item.value, item.unit] for item in data.values()
         ]
     print(AsciiTable(table).table)
     print(data)
