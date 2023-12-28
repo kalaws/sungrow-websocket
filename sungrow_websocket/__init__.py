@@ -203,7 +203,7 @@ class SungrowWebsocket:
 
 
 def main():
-    """Command line interface to the inververter"""
+    """Command line interface to the inverter"""
     parser = argparse.ArgumentParser(
         description="Retrieve data from Sungrow inverter using websocket"
     )
@@ -222,7 +222,7 @@ def main():
         ]
     else:
         table = [["Device", "Item", "Value"]] + [
-            [item.device, item.desc, f"{item.value} {item.unit}\n"] for item in data.values()
+            ["Device:" item.device, item.desc, "Value:" f"{item.value} {item.unit}"] for item in data.values()
         ]
     print(AsciiTable(table).table)
     f = open("/share/log.txt", "a")
