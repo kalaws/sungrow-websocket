@@ -97,7 +97,6 @@ class SungrowWebsocket:
                 )
             )
             d = json.loads(await websocket.recv())
-            print(d["result_data"]["list"])
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
             
@@ -119,6 +118,7 @@ class SungrowWebsocket:
                     )
                 )
                 d = json.loads(await websocket.recv())
+                print(d["result_data"]["list"])
                 if d.get('result_code') == 1 or d.get('result_arg') == "success":
                     for item in d["result_data"]["list"]:
                         name = item["data_name"]
