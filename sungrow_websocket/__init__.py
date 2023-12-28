@@ -232,7 +232,7 @@ def main():
     print(AsciiTable(table).table)
     print(data)
     f = open("/config/www/resurser/log.txt", "w")
-    print(table, file=f)
+    print(data, file=f)
     f.close()
 
 
