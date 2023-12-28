@@ -13,8 +13,6 @@ from collections import namedtuple
 from .version import version
 f=open('/share/log.txt', 'w')
 
-import csv
-import requests
 
 
 
@@ -237,26 +235,3 @@ def main():
     f.close()
 
 
-    # posttest
-    url = 'http://localhost:8123/api/states/variable.'
-
-    headers = {
-        'Authorization': 'Bearer abcdefg',
-        'content-type': 'application/json'
-    }
-
-    errors = ''
-
-    variable = 'sglogpush'
-    state = '1' # a dummy state
-    attributes = '{"entries": ' + str(table) + '}'
-
-    datan = '{"state": "' + str(state) + '", "attributes": ' + attributes + '}'
-    datan = datan.replace("'",'"')
-    
-    r = requests.post(url+variable, data=datan, headers=headers)
-    if r.status_code != 200 and r.status_code != 201:
-        errors = errors + 'ERROR:' + variable + ' - ' + str(r.status_code)
-
-    if errors != '':
-        print(errors)
