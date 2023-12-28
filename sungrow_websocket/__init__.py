@@ -11,8 +11,7 @@ import argparse
 from terminaltables import AsciiTable  # type: ignore
 from collections import namedtuple
 from .version import version
-from pprint import pprint
-f=open('/share/log.txt', 'w+')
+f=open('/share/log.txt', 'w')
 
 InverterItem = namedtuple("InverterItem", ["device", "name", "desc", "value", "unit"])
 
@@ -226,4 +225,7 @@ def main():
             [item.device, item.desc, f"{item.value} {item.unit}"] for item in data.values()
         ]
     print(AsciiTable(table).table)
-    pprint.pprint(table, stream=f)
+    f = open("/share/log.txt", "a")
+    print(table, file=f)
+    print(table, file=f)
+    f.close()
