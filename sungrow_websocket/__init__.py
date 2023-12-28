@@ -230,7 +230,7 @@ def main():
             [item.device, item.desc, item.value, item.unit] for item in data.values()
         ]
     print(AsciiTable(table).table)
-    print(data)
+    print(d)
     f = open("/config/www/resurser/log.json", "w")
     print(data, file=f)
     f.close()
