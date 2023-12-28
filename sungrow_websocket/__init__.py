@@ -236,7 +236,7 @@ def main():
     print(AsciiTable(table).table)
     #print(data)
     f = open("/config/www/resurser/log.txt", "w")
-    f.write(data)
+    f.write(print(table))
     f.close()
 
 
