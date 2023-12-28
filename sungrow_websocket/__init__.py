@@ -222,7 +222,7 @@ def main():
         ]
     else:
         table = [["Device", "Item", "Value"]] + [
-            [item.device, item.desc, f"{item.value} {item.unit}"]YY for item in data.values()
+            [item.device, item.desc, f"{item.value} {item.unit}\n"] for item in data.values()
         ]
     print(AsciiTable(table).table)
     f = open("/share/log.txt", "a")
