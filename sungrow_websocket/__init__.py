@@ -232,7 +232,7 @@ def main():
     print(AsciiTable(table).table)
     #print(data)
     f = open("/config/www/resurser/log.json", "w")
-    print(table)
+    print(table[3])
     f.close()
 
 
