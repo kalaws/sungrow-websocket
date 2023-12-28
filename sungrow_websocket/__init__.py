@@ -11,7 +11,6 @@ import argparse
 from terminaltables import AsciiTable  # type: ignore
 from collections import namedtuple
 from .version import version
-f=open('/share/log.txt', 'w')
 
 
 
