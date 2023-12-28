@@ -118,9 +118,9 @@ class SungrowWebsocket:
                     )
                 )
                 d = json.loads(await websocket.recv())
-                f = open("/config/www/resurser/log.json", "w")
-                print(json.dumps(d["result_data"]["list"]), file=f)
-                f.close()
+                #f = open("/config/www/resurser/log.json", "w")
+                #print(json.dumps(d["result_data"]["list"]), file=f)
+                #f.close()
                 if d.get('result_code') == 1 or d.get('result_arg') == "success":
                     for item in d["result_data"]["list"]:
                         name = item["data_name"]
@@ -238,7 +238,7 @@ def main():
         }
     print(AsciiTable(table).table)
     print(data)
-    f = open("/config/www/resurser/log.txt", "w")
+    f = open("/config/www/resurser/log.json", "w")
     print(table2, file=f)
     f.close()
 
