@@ -234,7 +234,7 @@ def main():
 #            [item.device, item.desc, item.value, item.unit] for item in data.values()
 #        ]
         table2 = { "Body" : {
-            item.desc: item.value for item in data.values()
+            f"{item.desc} {item.unit}": item.value for item in data.values()
         } }
 #    print(AsciiTable(table).table)
 #    print(data)
