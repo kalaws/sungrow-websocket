@@ -238,9 +238,9 @@ def main():
         } }
 #    print(AsciiTable(table).table)
 #    print(data)
-    f = open("/config/www/resurser/log.json", "w")
-    print(json.dumps(table2), file=f)
-    f.close()
+#    f = open("/config/www/resurser/log.json", "w")
+#    print(json.dumps(table2), file=f)
+#    f.close()
     print(json.dumps(table2))
 
 
