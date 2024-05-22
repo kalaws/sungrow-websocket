@@ -77,7 +77,7 @@ class SungrowWebsocket:
         ) as websocket:
             await websocket.send(
                 json.dumps(
-                    {"lang": self.locale, "token": "", "service": "real"}
+                    {"lang": self.locale, "token": "", "service": "connect"}
                 )
             )
             d: Result = json.loads(await websocket.recv())
