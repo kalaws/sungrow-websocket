@@ -41,7 +41,7 @@ class ResultData(TypedDict):
 
 class SungrowWebsocket:
     """ Websocket API to the Sungrow Inverter"""
-    def __init__(self, host: str, *, port: int = 8082, locale: str = "en_US"):
+    def __init__(self, host: str, *, port: int = 8082, locale: str = "en_us"):
         self.host: str = host
         self.port: int = port
         self.locale: str = locale
@@ -93,7 +93,7 @@ class SungrowWebsocket:
                         "token": token,
                         "service": "devicelist",
                         "type": "0",
-                        "is_check_token": "1",
+                        "is_check_token": "0",
                     }
                 )
             )
