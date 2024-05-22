@@ -97,6 +97,7 @@ class SungrowWebsocket:
                 )
             )
             d = json.loads(await websocket.recv())
+            print(d)
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
             
