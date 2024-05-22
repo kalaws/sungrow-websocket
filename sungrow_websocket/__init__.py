@@ -86,6 +86,17 @@ class SungrowWebsocket:
                 return data
             token: str = d["result_data"]["token"]
             print(d)
+            print(
+                json.dumps(
+                    {
+                        "lang": self.locale,
+                        "token": token,
+                        "service": "devicelist",
+                        "type": "0",
+                        "is_check_token": "0",
+                    }
+                )
+            )
             await websocket.send(
                 json.dumps(
                     {
