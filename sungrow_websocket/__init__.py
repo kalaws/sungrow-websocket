@@ -81,11 +81,11 @@ class SungrowWebsocket:
                 )
             )
             d: Result = json.loads(await websocket.recv())
-            print(d)
+            
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
             token: str = d["result_data"]["token"]
-
+            #print(data)
             await websocket.send(
                 json.dumps(
                     {
@@ -100,7 +100,7 @@ class SungrowWebsocket:
             d = json.loads(await websocket.recv())
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
-            
+                print(data)
             for device in d["result_data"]["list"]:
                 dev_id = str(device["dev_id"])
                 dev_name = device["dev_name"]
