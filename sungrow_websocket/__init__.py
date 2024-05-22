@@ -98,9 +98,10 @@ class SungrowWebsocket:
                 )
             )
             d = json.loads(await websocket.recv())
+            print(d)
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
-                print(data)
+                
             for device in d["result_data"]["list"]:
                 dev_id = str(device["dev_id"])
                 dev_name = device["dev_name"]
@@ -119,9 +120,9 @@ class SungrowWebsocket:
                     )
                 )
                 d = json.loads(await websocket.recv())
-                f = open("/config/www/resurser/log.json", "w")
+                #f = open("/config/www/resurser/log.json", "w")
                 print(json.dumps(d["result_data"]["list"]), file=f)
-                f.close()
+                #f.close()
                 if d.get('result_code') == 1 or d.get('result_arg') == "success":
                     for item in d["result_data"]["list"]:
                         name = item["data_name"]
