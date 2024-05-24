@@ -68,7 +68,7 @@ class SungrowWebsocket:
                         self.strings[v[0]] = v[1]
 
     async def get_data_async(self) -> dict[str, InverterItem]:
-        logintoken = ""
+        token = ""
         if len(self.strings) == 0:
             await self._update_strings()
 
@@ -77,7 +77,7 @@ class SungrowWebsocket:
             f"ws://{self.host}:{self.port}/ws/home/overview"
         ) as websocket:
 
-            if logintoken == 0:
+            if token == 0:
                 await websocket.send(
                     json.dumps(
                         {"lang": self.locale, "token": "", "service": "login", "username": "admin", "passwd": "pw8888"}
@@ -86,13 +86,13 @@ class SungrowWebsocket:
                 d: Result = json.loads(await websocket.recv())
                 if d["result_code"] != 1 or d["result_msg"] != "success":
                     return data
-                logintoken: str = d["result_data"]["token"]
+                token: str = d["result_data"]["token"]
             else:
                 await websocket.send(
                     json.dumps(
                         {
                             "lang": self.locale,
-                            "token": logintoken,
+                            "token": token,
                             "service": "devicelist",
                             "type": "0",
                             "is_check_token": "0",
