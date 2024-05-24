@@ -70,27 +70,29 @@ class SungrowWebsocket:
                         
     def connect(self):
         self.logintoken = {}
-        await websocket.send(
-            json.dumps(
-                {"lang": self.locale, "token": "", "service": "connect"}
+        try: 
+            websocket.send(
+                json.dumps(
+                    {"lang": "en_us", "token": "", "service": "connect"}
+                )
             )
-        )
-        d: Result = json.loads(await websocket.recv())
-        if d["result_code"] != 1 or d["result_msg"] != "success":
-            return data
-        token: str = d["result_data"]["token"]
+            d: Result = json.loads(await websocket.recv())
+            if d["result_code"] != 1 or d["result_msg"] != "success":
+                return data
+            token: str = d["result_data"]["token"]
         
-        await websocket.send(
-            json.dumps(
-                {"lang": self.locale, "token": "", "service": "login", "username": "admin", "passwd": "pw8888"}
+        try: 
+            websocket.send(
+                json.dumps(
+                    {"lang": self.locale, "token": "", "service": "login", "username": "admin", "passwd": "pw8888"}
+                )
             )
-        )
-        d: Result = json.loads(await websocket.recv())
-        if d["result_code"] != 1 or d["result_msg"] != "success":
-            return data
-        else:
-            self.logintoken: str = d["result_data"]["token"]
-        print(d)
+            d: Result = json.loads(await websocket.recv())
+            if d["result_code"] != 1 or d["result_msg"] != "success":
+                return data
+            else:
+                self.logintoken: str = d["result_data"]["token"]
+            print(d)
     
     async def get_data_async(self) -> dict[str, InverterItem]:
         if len(self.strings) == 0:
