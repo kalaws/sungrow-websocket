@@ -46,7 +46,7 @@ class SungrowWebsocket:
         self.port: int = port
         self.locale: str = locale
         self.strings: dict[str, str] = {}
-        self.token: ""
+        self.token: str = {}
 
     async def _update_strings(self):
         self.strings = {}
@@ -86,13 +86,13 @@ class SungrowWebsocket:
                 d: Result = json.loads(await websocket.recv())
                 if d["result_code"] != 1 or d["result_msg"] != "success":
                     return data
-                token: str = d["result_data"]["token"]
+                self.token: str = d["result_data"]["token"]
             else:
                 await websocket.send(
                     json.dumps(
                         {
                             "lang": self.locale,
-                            "token": token,
+                            "token": self.token,
                             "service": "devicelist",
                             "type": "0",
                             "is_check_token": "0",
@@ -115,7 +115,7 @@ class SungrowWebsocket:
                         json.dumps(
                             {
                                 "lang": self.locale,
-                                "token": token,
+                                "token": self.token,
                                 "service": "real",
                                 "dev_id": dev_id,
                             }
@@ -144,7 +144,7 @@ class SungrowWebsocket:
                         json.dumps(
                             {
                                 "lang": self.locale,
-                                "token": token,
+                                "token": self.token,
                                 "service": "real_battery",
                                 "dev_id": dev_id,
                             }
@@ -171,7 +171,7 @@ class SungrowWebsocket:
                         json.dumps(
                             {
                                 "lang": self.locale,
-                                "token": token,
+                                "token": self.token,
                                 "service": "direct",
                                 "dev_id": dev_id,
                             }
