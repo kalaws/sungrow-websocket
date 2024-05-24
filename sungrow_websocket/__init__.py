@@ -46,6 +46,7 @@ class SungrowWebsocket:
         self.port: int = port
         self.locale: str = locale
         self.strings: dict[str, str] = {}
+        self.token: ""
 
     async def _update_strings(self):
         self.strings = {}
@@ -68,7 +69,6 @@ class SungrowWebsocket:
                         self.strings[v[0]] = v[1]
 
     async def get_data_async(self) -> dict[str, InverterItem]:
-        token = ""
         if len(self.strings) == 0:
             await self._update_strings()
 
@@ -77,7 +77,7 @@ class SungrowWebsocket:
             f"ws://{self.host}:{self.port}/ws/home/overview"
         ) as websocket:
 
-            if token == 0:
+            if self.token == 0:
                 await websocket.send(
                     json.dumps(
                         {"lang": self.locale, "token": "", "service": "login", "username": "admin", "passwd": "pw8888"}
