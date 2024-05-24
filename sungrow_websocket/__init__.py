@@ -86,7 +86,7 @@ class SungrowWebsocket:
                 if d["result_code"] != 1 or d["result_msg"] != "success":
                     return data
                 self.token: str = d["result_data"]["token"]
-            
+            if self.token:
                 await websocket.send(
                     json.dumps(
                         {
