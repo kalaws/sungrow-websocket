@@ -81,7 +81,6 @@ class SungrowWebsocket:
                 )
             )
             d: Result = json.loads(await websocket.recv())
-            print(d)
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
             token: str = d["result_data"]["token"]
@@ -92,7 +91,6 @@ class SungrowWebsocket:
                 )
             )
             d: Result = json.loads(await websocket.recv())
-            print(d)
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
             token: str = d["result_data"]["token"]
