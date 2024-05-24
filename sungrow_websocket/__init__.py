@@ -238,6 +238,7 @@ def main():
 #        ]
         table2 = { "Body" : {
             f"{item.desc} {item.unit}": item.value for item in data.values()
+            "token": self.token
         } }
 #    print(AsciiTable(table).table)
 #    print(data)
