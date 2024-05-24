@@ -46,6 +46,7 @@ class SungrowWebsocket:
         self.port: int = port
         self.locale: str = locale
         self.strings: dict[str, str] = {}
+        self.logintoken: str = {}
 
     async def _update_strings(self):
         self.strings = {}
@@ -66,40 +67,46 @@ class SungrowWebsocket:
                     v = line.split("=", 1)
                     if len(v) == 2:
                         self.strings[v[0]] = v[1]
-
+                        
+    async def connect(self):
+        self.logintoken = {}
+        await websocket.send(
+            json.dumps(
+                {"lang": self.locale, "token": "", "service": "connect"}
+            )
+        )
+        d: Result = json.loads(await websocket.recv())
+        if d["result_code"] != 1 or d["result_msg"] != "success":
+            return data
+        token: str = d["result_data"]["token"]
+        
+        await websocket.send(
+            json.dumps(
+                {"lang": self.locale, "token": "", "service": "login", "username": "admin", "passwd": "pw8888"}
+            )
+        )
+        d: Result = json.loads(await websocket.recv())
+        if d["result_code"] != 1 or d["result_msg"] != "success":
+            return data
+        else:
+            self.logintoken: str = d["result_data"]["token"]
+        print(d)
+    
     async def get_data_async(self) -> dict[str, InverterItem]:
         if len(self.strings) == 0:
             await self._update_strings()
-
+        if len(self.logintoken) == 0:
+            await self.connect()
+                  
         data: dict[str, InverterItem] = {}
         async with websockets.client.connect(
             f"ws://{self.host}:{self.port}/ws/home/overview"
         ) as websocket:
             await websocket.send(
                 json.dumps(
-                    {"lang": self.locale, "token": "", "service": "connect"}
-                )
-            )
-            d: Result = json.loads(await websocket.recv())
-            if d["result_code"] != 1 or d["result_msg"] != "success":
-                return data
-            token: str = d["result_data"]["token"]
-            
-            await websocket.send(
-                json.dumps(
-                    {"lang": self.locale, "token": "", "service": "login", "username": "admin", "passwd": "pw8888"}
-                )
-            )
-            d: Result = json.loads(await websocket.recv())
-            if d["result_code"] != 1 or d["result_msg"] != "success":
-                return data
-            token: str = d["result_data"]["token"]
-            #print(d)
-            await websocket.send(
-                json.dumps(
                     {
                         "lang": self.locale,
-                        "token": token,
+                        "token": self.logintoken,
                         "service": "devicelist",
                         "type": "0",
                         "is_check_token": "0",
