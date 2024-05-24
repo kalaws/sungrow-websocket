@@ -98,7 +98,7 @@ class SungrowWebsocket:
                     )
                 )
                 d = json.loads(await websocket.recv())
-                #print(d)
+                print(d)
                 if d["result_code"] != 1 or d["result_msg"] != "success":
                     return data
                 
@@ -244,6 +244,6 @@ def main():
 #    f = open("/config/www/resurser/log.json", "w")
 #    print(json.dumps(table2), file=f)
 #    f.close()
-    print(json.dumps(table2) + self.token)
+    print(json.dumps(table2))
 
 
