@@ -107,9 +107,19 @@ class SungrowWebsocket:
         ) as websocket:
             await websocket.send(
                 json.dumps(
+                    {"lang": "en_us", "token": "self.logintoken", "service": "connect"}
+                )
+            )
+            d: Result = json.loads(await websocket.recv())
+            if d["result_code"] != 1 or d["result_msg"] != "success":
+                return data
+            nowtoken: str = d["result_data"]["token"]
+        
+            await websocket.send(
+                json.dumps(
                     {
                         "lang": self.locale,
-                        "token": self.logintoken,
+                        "token": nowtoken,
                         "service": "devicelist",
                         "type": "0",
                         "is_check_token": "0",
@@ -132,7 +142,7 @@ class SungrowWebsocket:
                     json.dumps(
                         {
                             "lang": self.locale,
-                            "token": token,
+                            "token": nowtoken,
                             "service": "real",
                             "dev_id": dev_id,
                         }
@@ -161,7 +171,7 @@ class SungrowWebsocket:
                     json.dumps(
                         {
                             "lang": self.locale,
-                            "token": token,
+                            "token": nowtoken,
                             "service": "real_battery",
                             "dev_id": dev_id,
                         }
@@ -188,7 +198,7 @@ class SungrowWebsocket:
                     json.dumps(
                         {
                             "lang": self.locale,
-                            "token": token,
+                            "token": nowtoken,
                             "service": "direct",
                             "dev_id": dev_id,
                         }
