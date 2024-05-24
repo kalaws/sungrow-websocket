@@ -35,7 +35,6 @@ class ResultDataItems(TypedDict):
 
 
 class ResultData(TypedDict):
-    token: str
     list: list[ResultDataItems]
 
 
@@ -46,7 +45,7 @@ class SungrowWebsocket:
         self.port: int = port
         self.locale: str = locale
         self.strings: dict[str, str] = {}
-        self.token: str = {}
+        self.token = ""
 
     async def _update_strings(self):
         self.strings = {}
@@ -77,7 +76,7 @@ class SungrowWebsocket:
             f"ws://{self.host}:{self.port}/ws/home/overview"
         ) as websocket:
 
-            if len(self.token) == 0:
+            if not self.token:
                 await websocket.send(
                     json.dumps(
                         {"lang": self.locale, "token": "", "service": "login", "username": "admin", "passwd": "pw8888"}
