@@ -85,7 +85,8 @@ class SungrowWebsocket:
                 d: Result = json.loads(await websocket.recv())
                 if d["result_code"] != 1 or d["result_msg"] != "success":
                     return data
-                self.token: str = d["result_data"]["token"]
+                #self.token: str = d["result_data"]["token"]
+                self.token: str = "bf7ea57a-8482-4f0c-ba22-f08e273d7c99"
                 await websocket.send(
                     json.dumps(
                         {
@@ -238,7 +239,6 @@ def main():
 #        ]
         table2 = { "Body" : {
             f"{item.desc} {item.unit}": item.value for item in data.values()
-            "token": self.token
         } }
 #    print(AsciiTable(table).table)
 #    print(data)
