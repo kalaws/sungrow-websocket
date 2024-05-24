@@ -77,7 +77,7 @@ class SungrowWebsocket:
             f"ws://{self.host}:{self.port}/ws/home/overview"
         ) as websocket:
 
-            if self.token == 0:
+            if len(self.token) == 0:
                 await websocket.send(
                     json.dumps(
                         {"lang": self.locale, "token": "", "service": "login", "username": "admin", "passwd": "pw8888"}
