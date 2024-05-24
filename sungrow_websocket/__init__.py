@@ -68,7 +68,7 @@ class SungrowWebsocket:
                     if len(v) == 2:
                         self.strings[v[0]] = v[1]
                         
-    async def connect(self):
+    def connect(self):
         self.logintoken = {}
         await websocket.send(
             json.dumps(
@@ -96,7 +96,7 @@ class SungrowWebsocket:
         if len(self.strings) == 0:
             await self._update_strings()
         if len(self.logintoken) == 0:
-            await self.connect()
+            self.connect()
                   
         data: dict[str, InverterItem] = {}
         async with websockets.client.connect(
