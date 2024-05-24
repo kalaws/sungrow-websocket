@@ -84,7 +84,7 @@ class SungrowWebsocket:
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
             token: str = d["result_data"]["token"]
-            print(d["result_data"]["token"])
+            print(d)
             await websocket.send(
                 json.dumps(
                     {"lang": self.locale, "token": token, "service": "login", "username": "admin", "passwd": "pw8888"}
@@ -94,7 +94,7 @@ class SungrowWebsocket:
             if d["result_code"] != 1 or d["result_msg"] != "success":
                 return data
             token: str = d["result_data"]["token"]
-            print(d["result_data"]["token"])
+            print(d)
             await websocket.send(
                 json.dumps(
                     {
